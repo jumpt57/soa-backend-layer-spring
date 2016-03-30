@@ -16,28 +16,31 @@ public class CategoryController {
 	@Autowired
 	private CategoryRepository categoryRepository;
 	
-	@RequestMapping(method=RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST, params = "name")
 	public Category create(@RequestParam(value = "name") String name){
 		return categoryRepository.save(new Category(name));
 	}
 	
-	@RequestMapping(method=RequestMethod.GET, name = "get", params = "id")
+	@RequestMapping(method = RequestMethod.GET, params = "id")
 	public Category get(@RequestParam(value = "id") Long id){
 		return categoryRepository.findOne(id);
 	}
 	
-	@RequestMapping(method=RequestMethod.GET, name = "list", params = "")
+	@RequestMapping(method = RequestMethod.GET)
 	public Iterable<Category> list(){
 		return categoryRepository.findAll();
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT)
-	public Category modify(){
-		return null;
+	@RequestMapping(method = RequestMethod.PUT, params = {"id", "name"})
+	public Category modify(@RequestParam(value = "id") Long id, @RequestParam(value = "name") String name){
+		Category category = categoryRepository.findOne(id);
+		category.setName(name);
+		return categoryRepository.save(category);
 	}  
 	
-	@RequestMapping(method=RequestMethod.DELETE)
-	public String delete(@RequestParam(value = "id") Long id){
-		return "OK";
+	@RequestMapping(method = RequestMethod.DELETE)
+	public boolean delete(@RequestParam(value = "id") Long id){
+		categoryRepository.delete(categoryRepository.findOne(id));
+		return categoryRepository.findOne(id) == null;
 	}  
 }

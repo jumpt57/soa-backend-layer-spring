@@ -23,6 +23,10 @@ public class Category implements Serializable {
 	
 	@OneToMany(mappedBy = "categ", fetch = FetchType.EAGER)
 	private List<Item> items;
+	
+	public Category(String name){
+		this.name = name;
+	}
 
 	public Category() {
 		super();

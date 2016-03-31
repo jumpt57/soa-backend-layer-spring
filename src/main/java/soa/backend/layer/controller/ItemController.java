@@ -16,6 +16,7 @@ public class ItemController {
 
     @Autowired
     private ItemRepository itemRepository;
+    @Autowired
     private CategoryRepository categoryRepository;
 
     @RequestMapping(method = RequestMethod.POST, params =  {"name","description","price","keywords","pic","idcateg"})

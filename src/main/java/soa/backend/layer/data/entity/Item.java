@@ -35,6 +35,15 @@ public class Item implements Serializable {
 	@ManyToOne
 	private Category categ;
 
+	public Item(String name, String description, float price, String[] keywords, String pic, Category categ) {
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.keywords = keywords;
+		this.pic = pic;
+		this.categ = categ;
+	}
+
 	public Item() {
 		super();
 	}

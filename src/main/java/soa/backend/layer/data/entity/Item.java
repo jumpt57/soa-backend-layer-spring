@@ -1,13 +1,24 @@
 package soa.backend.layer.data.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
  * Entity implementation class for Entity: Item
  *
  */
 @Entity
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Item implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -32,7 +43,7 @@ public class Item implements Serializable {
 	private String[] keywords;
 
 	@JoinColumn
-	@ManyToOne
+	@ManyToOne	
 	private Category categ;
 
 	public Item(String name, String description, float price, String[] keywords, String pic, Category categ) {

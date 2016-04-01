@@ -1,10 +1,12 @@
 package soa.backend.layer.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import soa.backend.layer.data.entity.Category;
 import soa.backend.layer.data.entity.Item;
 import soa.backend.layer.data.repository.CategoryRepository;
@@ -18,6 +20,11 @@ public class ItemController {
     private ItemRepository itemRepository;
     @Autowired
     private CategoryRepository categoryRepository;
+    
+    public Iterable<Item> recherche(@RequestParam(value = "keywords") String[] keywords){
+    	//TODO
+    	return null;
+    }
 
     @RequestMapping(method = RequestMethod.POST, params =  {"name","description","price","keywords","pic","idcateg"})
     public Item create(@RequestParam(value = "name") String name,
@@ -29,6 +36,14 @@ public class ItemController {
     {
         Category category = categoryRepository.findOne(idcateg);
         return itemRepository.save(new Item(name,description,price,keywords,pic,category));
+    }
+    
+    @RequestMapping(method = RequestMethod.POST)
+    public Item create(@RequestBody Item item)
+    {
+        Category category = categoryRepository.findOne(item.getCateg().getId());
+        item.setCateg(category);
+        return itemRepository.save(item);
     }
 
     @RequestMapping(method = RequestMethod.GET, params = "id")
@@ -58,6 +73,12 @@ public class ItemController {
         item.setKeywords(keywords);
         item.setPic(pic);
         item.setCateg(category);
+        return itemRepository.save(item);
+    }
+    
+    @RequestMapping(method = RequestMethod.PUT)
+    public Item modify(@RequestBody Item item)
+    {       
         return itemRepository.save(item);
     }
 

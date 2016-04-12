@@ -11,7 +11,7 @@ angular.module('catalogueApp').controller('searchCtrl', ['$scope', '$http', '$lo
         $scope.items = [];
         $http({
             method: 'GET',
-            url: './json/items.json'
+            url: './item'
         }).then(function successCallback(response) {
             angular.forEach(response.data, function (item) {
                 verif(param, item);
@@ -27,11 +27,13 @@ angular.module('catalogueApp').controller('searchCtrl', ['$scope', '$http', '$lo
 
     function verif(param, item){
         var params = param.split(' ');
-
         var find = false;
         angular.forEach(params,function(param){
-            var keywords = item.keywords;
-            find = contains(keywords, param);
+            //var keywords = item.keywords;
+        	var keywords = item.name; //TODO: Comment est gérée la gestion des keywords ??
+            console.log(param);
+            find = (item.name.indexOf(param) > -1);
+            //find = contains(keywords, param);
         });
         if(find == true){
             $scope.items.push(item);

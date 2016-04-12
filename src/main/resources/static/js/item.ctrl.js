@@ -12,8 +12,9 @@ angular.module('catalogueApp').controller('ItemCtrl', ['$scope', '$routeParams',
             method: 'GET',
             url: './item'
         }).then(function successCallback(response) {
+        	console.log(response.data);
             angular.forEach(response.data, function (item) {
-            	if(item.categ==$routeParams.category)
+            	if(item.categ.id==$routeParams.category)
             		$scope.items.push(item);
             });
         }, function errorCallback(response) {
@@ -23,7 +24,7 @@ angular.module('catalogueApp').controller('ItemCtrl', ['$scope', '$routeParams',
 	else{
 		$http({
             method: 'GET',
-            url: './json/items.json'
+            url: './item'
         }).then(function successCallback(response) {
             $scope.items = response.data;
         }, function errorCallback(response) {

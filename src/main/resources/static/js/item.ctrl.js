@@ -10,7 +10,7 @@ angular.module('catalogueApp').controller('ItemCtrl', ['$scope', '$routeParams',
 		$scope.items = [];
         $http({
             method: 'GET',
-            url: './json/items.json'
+            url: './item'
         }).then(function successCallback(response) {
             angular.forEach(response.data, function (item) {
             	if(item.categ==$routeParams.category)

@@ -8,7 +8,7 @@ angular.module('catalogueApp').controller('CategoryCtrl', ['$scope', '$routePara
 
 	$http({
         method: 'GET',
-        url: './json/categories.json'
+        url: './categ'
     }).then(function successCallback(response) {
     	$scope.categories = response.data;
     }, function errorCallback(response) {

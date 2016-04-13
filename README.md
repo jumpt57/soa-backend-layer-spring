@@ -1,11 +1,11 @@
 # EPSI i4 SOA 
 
 ## Equipe
-.Aymeric Mivielle
-.Benoit Grand
-.Jessica Lacaze
-.Julien Maupetit
-.Pierre Hosteins
+- Aymeric Mivielle <br/>
+- Benoit Grand <br/>
+- Jessica Lacaze <br/>
+- Julien Maupetit <br/>
+- Pierre Hosteins <br/>
 
 ## Technos
 1. SGBD : PostgreSQL 9.5
